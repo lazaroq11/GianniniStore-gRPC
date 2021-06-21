@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+service GuitarService{
+   rpc getAll (Empty) returns (GuitarList) {}
+   rpc get (GuitarRequestId) returns (Guitar) {}
+   rpc insert (Guitar) returns (Guitar) {}
+   rpc update (Guitar) returns (Guitar) {}
+   rpc remove (GuitarRequestId) returns (Empty) {}
+}
+
+ message Empty {}
+
+ message Guitar {
+     string id = 1;
+     string name = 2;
+     string model = 3;
+     string corda = 4;
+     string material = 5;
+ }
+
+ message GuitarList {
+     repeated Guitar guitars = 1;
+ }
+
+ message GuitarRequestId {
+     string id = 1;
+ }

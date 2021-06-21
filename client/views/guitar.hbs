@@ -1,0 +1,204 @@
+<html lang="en">
+
+ <head>
+    <meta charset="utf-8">
+       <div class="py-5 text-center">
+    
+    <title>Giannini Store</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <style>
+            .guitar {
+                background-color: #764abc;
+                color: white;
+            }
+        </style>
+    </head>
+
+ <body>
+     <div class="container">    
+         <div class = "py-5 text-center">
+               <div class="py-5 text-center">
+            <img src="https://drive.google.com/file/d/1u7HpD_fw5clNizZdzd6UzDf5-wjJvsj_/view?usp=sharing" height="72"/>
+            
+             <p class = "lead">Tocando desde 2021</p>
+    
+            </div>
+            </div>
+
+            <table class = "table" id ="guitar-table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nome</th>
+                        <th>Modelo</th>
+                        <th>Corda</th>
+                        <th>Material</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each results}}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{name}}</td>
+                        <td>{{model}}</td>
+                        <td>{{corda}}</td>
+                        <td>{{material}}</td>
+                        <td>
+                            <a href = "javascript:void(0);" class = "btn btn-sm edit guitar" data-id="{{ id }}"
+                             data-name="{{ name }}" data-model="{{model}}" data-corda="{{corda}}" 
+                             data-material = "{{material}}">Editar</a>
+                             <a href = "javascript:void(0);" class = "btn btn-sm btn-danger remove" data-id ="{{ id }}">Remover</a>
+                        </td>
+                    </tr>
+                    {{else}}
+                    <tr>
+                        <td colspan="5" class="text-center">Nenhum registro</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            <button class="btn btn-success float-right" data-toggle="modal" data-target="#newGuitarModal">Registrar</button>
+     </div>
+
+<!-- Add -->
+
+     <form action="/save" method = "post">
+       <div class = "modal fade" id = "newGuitarModal" role = "dialog">
+           <div class = "modal-dialog" role = "document">
+               <div class = "modal-content">
+                   <div class = "modal-header">
+                       <h4 class = "modal-title">Novo Instrumento</h4>
+                       <button type = "button" class = "close" data-dismiss="modal">
+                           <span>&times;</span>
+                       </button>
+                       <div>
+                           <div class = "modal-body">
+                               <div class = "form-group">
+                                   <input type ="text" name="name" class = "form-control" placeholder="Guitar"
+                                   required = "required">
+                               </div>
+
+                               <div class = "form-group">
+                                <input type ="text" name="model" class = "form-control" placeholder="Modelo"
+                                required = "required">
+                            </div>
+
+                            <div class = "form-group">
+                                <input type ="text" name="corda" class = "form-control" placeholder="Corda"
+                                required = "required">
+                            </div>
+
+                            <div class = "form-group">
+                                <input type ="text" name="material" class = "form-control" placeholder="Material"
+                                required = "required">
+                            </div>
+
+                            <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn logrocket">Create</button>
+                    </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+    </form>
+
+<!-- Edit -->
+
+    <form action="/update" method = "post">
+     <div class = "modal fade" id = "editGuitarModal" role = "dialog">
+         <div class = "modal-dialog" role = "document">
+             <div class="modal-content">
+                 <div class = "modal-header">
+                     <h4 class = "modal-title">Editar Instrumento</h4>
+                     <button type = "button" class = "close" data-dismiss="modal">
+                         <span>&times;</span>
+                     </button>
+                 </div>
+                 <div class = "modal-body">
+                    <div class = "modal-body">
+                        <div class = "form-group">
+                            <input type ="text" name="name" class = "form-control name" placeholder="Guitar"
+                            required = "required">
+                        </div>
+
+                        <div class = "form-group">
+                         <input type ="text" name="model" class = "form-control model" placeholder="Modelo"
+                         required = "required">
+                     </div>
+
+                     <div class = "form-group">
+                         <input type ="text" name="corda" class = "form-control corda" placeholder="Corda"
+                         required = "required">
+                     </div>
+
+                     <div class = "form-group">
+                         <input type ="text" name="material" class = "form-control material" placeholder="Material"
+                         required = "required">
+                     </div>
+                 </div>
+                   <div class="modal-footer">
+                        <input type="hidden" name="id" class="guitar_id">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn guitar">Atualizar</button>
+                    </div>
+             </div>
+         </div>
+     </div>
+    </form>
+
+<!-- Remove -->
+
+<form action="/remove" id = "add-row-form"  method = "post">
+  <div class ="modal fade" id="removeGuitarModal" role = "dialog" aria-labelledby="myModalLabel">
+      <div class = "modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h4 class = "modal-title">Remover Guitarra    </h4>
+                  <button type = "button" class = "close" data-dismiss="modal"><span>&times;</span></button>
+              </div>
+              <div class="modal-body">
+                  Tem certeza que deseja remover?
+              </div>
+              <div class="modal-footer">
+                  <input type = "hidden" name="guitar_id" class="form-control guitar_id_removal"
+                  required="required">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                  <button type = "submit" class ="btn guitar">Remover</button>
+              </div>
+          </div>
+      </div>
+  </div>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $('#guitar-table').on('click', '.edit', function () {
+                $('#editGuitarModal').modal('show');
+
+
+                $('.guitar_id').val($(this).data('id'));
+                $('.name').val($(this).data('name'));
+                $('.model').val($(this).data('model'));
+                $('.corda').val($(this).data('corda'));
+                $('.material').val($(this).data('material'));
+            }).on('click', '.remove', function () {
+                $('#removeGuitarModal').modal('show');
+
+
+                $('.guitar_id_removal').val($(this).data('id'));
+            });
+        });
+    </script>
+
+ </body>
+</html>
