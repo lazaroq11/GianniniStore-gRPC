@@ -3,9 +3,10 @@ CRUD de registros da Giannini Store utilizando gRPC
 
 
 ## Dependências
-
+### Na pasta server
 npm start
 
+### Na pasta client
 npm node index.js
 
 
