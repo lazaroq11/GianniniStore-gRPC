@@ -85,7 +85,7 @@ server.addService(guitarProto.GuitarService.service,{
             n=>n.id == call.request.id
         );
 
-        if(existingGuitarIndex != -1){
+        if(existingGuitarIndex){
             guitars.splice(existingGuitarIndex,1);
             callback(null, {});
         }else{

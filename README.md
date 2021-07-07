@@ -8,3 +8,6 @@ npm start
 
 npm node index.js
 
+
+## Instalações
+npm install --save grpc @grpc/proto-loader uuid express hbs body-parser
